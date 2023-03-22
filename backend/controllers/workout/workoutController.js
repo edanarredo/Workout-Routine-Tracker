@@ -1,4 +1,5 @@
-const Workout = require("../models/workoutModel");
+const Workout = require("../../models/workoutModel");
+const mongoose = require("mongoose");
 
 // GET all workouts
 const listWorkouts = async (req, res) => {
@@ -9,11 +10,16 @@ const listWorkouts = async (req, res) => {
 // GET a single workout
 const getWorkoutById = async (req, res) => {
     const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) 
+        return res.status(404).json({ error: `Workout with id ${id} not found.` });
+
     const workout = await Workout.findById(id);
 
     // If the workout is not found, return a 404 error.
-    if (!workout) return res.status(404).json({ error: `Workout with id ${id} not found.` });
-
+    if (!workout) 
+        return res.status(404).json({ error: `Workout with id ${id} not found.` });
+        
     res.status(200).json({ result: workout });
 };
 
@@ -40,7 +46,6 @@ const updateWorkoutById = async (req, res) => {
     const { id } = req.params;
     const { title, reps, weight } = req.body;
 };
-
 
 // Exports the functions to be used in the routes.
 module.exports = {
