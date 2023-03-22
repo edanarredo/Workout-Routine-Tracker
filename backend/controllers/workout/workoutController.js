@@ -12,7 +12,7 @@ const getWorkoutById = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) 
-        return res.status(404).json({ error: `Workout with id ${id} not found.` });
+        return res.status(404).json({ error: `${id} is an invalid ID.` });
 
     const workout = await Workout.findById(id);
 
@@ -37,14 +37,30 @@ const createWorkout = async (req, res) => {
 
 // DELETE a workout by id
 const deleteWorkoutById = async (req, res) => {
-    const workout = await Workout.findByIdAndDelete(req.params.id);
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).json({ error: `${id} is an invalid ID.` });
+
+    const workout = await Workout.findOneAndDelete({_id: id});
+
+    if (!workout)
+        return res.status(400).json({ error: `Workout with id ${id} not found.` });
+
     res.status(200).json({ message: `Workout deleted.`, result: workout });
 };
 
 // UPDATE a workout by id
 const updateWorkoutById = async (req, res) => {
     const { id } = req.params;
-    const { title, reps, weight } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) 
+        return res.status(404).json({ error: `${id} is an invalid ID.` });
+
+    const workout = await Workout.findByIdAndUpdate({_id: id}, {...req.body});
+
+    if (!workout) 
+        return res.status(400).json({ error: `Workout with id ${id} not found.` });
 };
 
 // Exports the functions to be used in the routes.
