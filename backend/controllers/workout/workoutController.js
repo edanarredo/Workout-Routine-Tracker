@@ -63,7 +63,6 @@ const updateWorkoutById = async (req, res) => {
         return res.status(400).json({ error: `Workout with id ${id} not found.` });
 };
 
-// Exports the functions to be used in the routes.
 module.exports = {
     listWorkouts, 
     getWorkoutById, 
