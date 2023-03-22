@@ -10,10 +10,10 @@ const {
 // Creates an instance of the router for us.
 const router = express.Router();
 
-router.get('/', async (req, res) => { listWorkouts(req, res) });
-router.get("/:id", async (req, res) => { getWorkoutById(req, res) });
-router.post("/", async (req, res) => { createWorkout(req, res) });
-router.delete("/:id", async (req, res) => { deleteWorkoutById(req, res) });
-router.patch("/:id", async (req, res) => { updateWorkoutById(req, res) });
+router.get('/', (req, res) => { listWorkouts });
+router.get("/:id", (req, res) => { getWorkoutById });
+router.post("/", (req, res) => { createWorkout });
+router.delete("/:id", (req, res) => { deleteWorkoutById });
+router.patch("/:id", (req, res) => { updateWorkoutById });
 
 module.exports = router;
