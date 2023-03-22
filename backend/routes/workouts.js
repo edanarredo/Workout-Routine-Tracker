@@ -10,10 +10,10 @@ const {
 // Creates an instance of the router for us.
 const router = express.Router();
 
-router.get('/', (req, res) => { listWorkouts });
-router.get("/:id", (req, res) => { getWorkoutById });
-router.post("/", (req, res) => { createWorkout });
-router.delete("/:id", (req, res) => { deleteWorkoutById });
-router.patch("/:id", (req, res) => { updateWorkoutById });
+router.get('/', listWorkouts);
+router.get("/:id", getWorkoutById);
+router.post("/", createWorkout);
+router.delete("/:id", deleteWorkoutById);
+router.patch("/:id", updateWorkoutById);
 
 module.exports = router;
