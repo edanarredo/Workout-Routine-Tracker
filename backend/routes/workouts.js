@@ -1,4 +1,5 @@
 const express = require("express");
+const { createWorkout, listWorkouts, getWorkoutById, deleteWorkoutById, updateWorkoutById } = require("../controllers/workout/workoutController");
 
 // Creates an instance of the router for us.
 const router = express.Router();
@@ -20,14 +21,7 @@ router.get("/:id", (req, res) => {
 
 // Create a new workout
 router.post("/", async (req, res) => {
-  const { title, reps, weight } = req.body;
   
-  try {
-    const workout = await Workout.create({ title, reps, weight });
-    res.status(200).json({ message: `New workout created.`, result: workout });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
 });
 
 // Delete a workout by id
