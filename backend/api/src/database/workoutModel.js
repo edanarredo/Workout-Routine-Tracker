@@ -20,4 +20,4 @@ const workoutSchema = new Schema({
 // Applies the schema to the model
 const Workout = mongoose.model('Workout', workoutSchema);
 
-module.exports = Workout;
+module.exports = { Workout };

@@ -1,4 +1,4 @@
-const Workout = require("../../models/workoutModel");
+const { Workout } = require("../database/workoutModel");
 const mongoose = require("mongoose");
 
 // GET all workouts
@@ -64,9 +64,5 @@ const updateWorkoutById = async (req, res) => {
 };
 
 module.exports = {
-    listWorkouts, 
-    getWorkoutById, 
-    createWorkout, 
-    deleteWorkoutById, 
-    updateWorkoutById
-};
+    updateWorkoutById, deleteWorkoutById, createWorkout, getWorkoutById, listWorkouts
+}
